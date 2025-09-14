@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.List;
 
 public class GmailSimulator {
-    private UserDatabase userDatabase;
+    public UserDatabase userDatabase;
     private User currentUser = null;
     private Scanner scanner;
 
@@ -85,6 +85,7 @@ public class GmailSimulator {
             if (var3 != null && var3.login(var2)) {
                 this.currentUser = var3;
                 System.out.println("Login successful! Welcome back, " + var3.getName() + "!");
+                new Menu().showGUI(this, var3);
             } else {
                 System.out.println("Invalid email or password. Please try again.");
             }
@@ -92,7 +93,6 @@ public class GmailSimulator {
             System.out.println("Error during login: " + var4.getMessage());
             System.out.println("Please try again.");
         }
-
     }
 
     private void register() {
@@ -176,6 +176,8 @@ public class GmailSimulator {
             // Update both users in the database
             this.userDatabase.updateUser(this.currentUser);
             this.userDatabase.updateUser(recipient);
+            this.userDatabase.updateUser(this.currentUser);
+            this.userDatabase.updateUser(recipient);
             System.out.println("Email sent successfully!");
             System.out.println("Email ID: " + var5.getEmailId());
         } catch (Exception var6) {
@@ -228,14 +230,14 @@ public class GmailSimulator {
 
     }
 
-    private void logout() {
+    public void logout() {
         System.out.println("Logging out... Goodbye, " + this.currentUser.getName() + "!");
         this.currentUser = null;
     }
     
 
 
-    private User findUserByEmail(String var1) {
+    public User findUserByEmail(String var1) {
         try {
             return this.userDatabase.findUserByEmail(var1);
         } catch (Exception var4) {

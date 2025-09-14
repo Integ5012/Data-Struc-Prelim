@@ -1,0 +1,48 @@
+SENT_MESSAGE
+SENDER:Jed (123@gmail.com)
+RECIPIENT:Carlo (321@gmail.com)
+SUBJECT:nice
+BODY:please work
+DATE:Mon Sep 15 00:37:15 PST 2025
+MESSAGE_END
+
+SENT_MESSAGE
+SENDER:Jed (123@gmail.com)
+RECIPIENT:Carlo (321@gmail.com)
+SUBJECT:nice
+BODY:please work
+DATE:Mon Sep 15 00:37:15 PST 2025
+MESSAGE_END
+
+SENT_MESSAGE
+SENDER:Jed (123@gmail.com)
+RECIPIENT:Carlo (321@gmail.com)
+SUBJECT:huhu
+BODY:gumana ka na pls
+DATE:Mon Sep 15 00:48:18 PST 2025
+MESSAGE_END
+
+SENT_MESSAGE
+SENDER:Jed (123@gmail.com)
+RECIPIENT:Carlo (321@gmail.com)
+SUBJECT:huhu
+BODY:gumana ka na pls
+DATE:Mon Sep 15 00:48:18 PST 2025
+MESSAGE_END
+
+SENT_MESSAGE
+SENDER:Jed (123@gmail.com)
+RECIPIENT:Carlo (321@gmail.com)
+SUBJECT:qwe
+BODY:qwe
+DATE:Mon Sep 15 00:53:46 PST 2025
+MESSAGE_END
+
+SENT_MESSAGE
+SENDER:Jed (123@gmail.com)
+RECIPIENT:Carlo (321@gmail.com)
+SUBJECT:qwe
+BODY:qwe
+DATE:Mon Sep 15 00:53:46 PST 2025
+MESSAGE_END
+
