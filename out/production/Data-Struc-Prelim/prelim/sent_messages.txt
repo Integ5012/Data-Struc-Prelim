@@ -1,0 +1,16 @@
+SENT_MESSAGE
+SENDER:Lexbher Lumiwes (2245587@slu.edu.ph)
+RECIPIENT:Dawson Lumiwes (123@slu.edu.ph)
+SUBJECT:Nice
+BODY:What the hell bor
+DATE:Mon Sep 01 03:21:12 PST 2025
+MESSAGE_END
+
+SENT_MESSAGE
+SENDER:Lexbher Lumiwes (2245587@slu.edu.ph)
+RECIPIENT:Dawson Lumiwes (123@slu.edu.ph)
+SUBJECT:Nice
+BODY:What the hell bor
+DATE:Mon Sep 01 03:21:12 PST 2025
+MESSAGE_END
+

@@ -15,79 +15,86 @@ public class LogIn {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(520, 420);
 		frame.setLocationRelativeTo(null);
-	frame.getContentPane().setBackground(UIUtils.BACKGROUND);
+		frame.getContentPane().setBackground(UIUtils.BACKGROUND);
 
+		// Create main panel with simple vertical layout
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridBagLayout());
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(Color.WHITE);
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets = new Insets(5, 5, 5, 5);
-		gbc.fill = GridBagConstraints.HORIZONTAL;
 
+		// Add logo at the top
 		ImageIcon logoIcon = new ImageIcon("src/prelim/Logo/gmail_logo_64x64.png");
 		JLabel logoLabel = new JLabel(logoIcon);
-		logoLabel.setHorizontalAlignment(JLabel.CENTER);
-		logoLabel.setVerticalAlignment(JLabel.CENTER);
-		logoLabel.setOpaque(false);
-	gbc.gridx = 0;
-	gbc.gridy = 0;
-	gbc.gridwidth = 2;
-	gbc.anchor = GridBagConstraints.CENTER;
-	gbc.fill = GridBagConstraints.NONE;
-	panel.add(logoLabel, gbc);
-	gbc.gridwidth = 1;
-	gbc.anchor = GridBagConstraints.WEST;
-	gbc.fill = GridBagConstraints.HORIZONTAL;
+		logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(logoLabel);
 
+		// Add space after logo
+		panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+		// Email field
 		JLabel userLabel = new JLabel("Email:");
 		userLabel.setFont(UIUtils.DEFAULT_FONT);
-		JTextField userField = new JTextField(15);
+		userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(userLabel);
+
+		JTextField userField = new JTextField(20);
+		userField.setMaximumSize(new Dimension(300, 30));
+		userField.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(userField);
+
+		// Add space between fields
+		panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+		// Password field
 		JLabel passLabel = new JLabel("Password:");
 		passLabel.setFont(UIUtils.DEFAULT_FONT);
-		JPasswordField passField = new JPasswordField(15);
+		passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(passLabel);
+
+		JPasswordField passField = new JPasswordField(20);
+		passField.setMaximumSize(new Dimension(300, 30));
+		passField.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(passField);
+
+		// Add space before login button
+		panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+		// Login button
 		JButton loginButton = UIUtils.createPrimaryButton("Login");
-		JButton registerButton = new JButton("Register");
-		UIUtils.styleButton(registerButton);
-		JLabel notRegisteredLabel = new JLabel("Not registered?");
-		notRegisteredLabel.setFont(UIUtils.DEFAULT_FONT);
+		loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(loginButton);
+
+		// Add space before message
+		panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+		// Message label
 		JLabel messageLabel = new JLabel("");
 		messageLabel.setFont(UIUtils.DEFAULT_FONT);
-		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(messageLabel);
 
-	gbc.gridx = 0;
-	gbc.gridy = 1;
-	panel.add(userLabel, gbc);
-	gbc.gridx = 1;
-	gbc.gridy = 1;
-	panel.add(userField, gbc);
+		// Add space before registration section
+		panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-	gbc.gridx = 0;
-	gbc.gridy = 2;
-	panel.add(passLabel, gbc);
-	gbc.gridx = 1;
-	gbc.gridy = 2;
-	panel.add(passField, gbc);
+		// Registration section - use a sub-panel for horizontal layout
+		JPanel registerPanel = new JPanel();
+		registerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 0));
+		registerPanel.setBackground(Color.WHITE);
+		registerPanel.setMaximumSize(new Dimension(300, 40));
 
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		gbc.gridwidth = 2;
-		gbc.anchor = GridBagConstraints.CENTER;
-		panel.add(loginButton, gbc);
+		JLabel notRegisteredLabel = new JLabel("Not registered?");
+		notRegisteredLabel.setFont(UIUtils.DEFAULT_FONT);
 
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		gbc.gridwidth = 2;
-		panel.add(messageLabel, gbc);
+		JButton registerButton = new JButton("Register");
+		UIUtils.styleButton(registerButton);
 
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		gbc.gridwidth = 1;
-		panel.add(notRegisteredLabel, gbc);
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		panel.add(registerButton, gbc);
+		registerPanel.add(notRegisteredLabel);
+		registerPanel.add(registerButton);
+		registerPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel.add(registerPanel);
 
+		// Login button action
 		loginButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				String email = userField.getText().trim().toLowerCase();
@@ -106,13 +113,14 @@ public class LogIn {
 			}
 		});
 
+		// Register button action
 		registerButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
 				SwingUtilities.invokeLater(() -> Register.showRegisterGUI(frame, simulator));
 			}
 		});
 
-		
+		// Center the panel in the frame
 		JPanel container = new JPanel(new GridBagLayout());
 		container.setBackground(UIUtils.BACKGROUND);
 		container.add(panel);

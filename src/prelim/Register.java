@@ -10,72 +10,79 @@ public class Register {
         dialog.setLocationRelativeTo(parentFrame);
         UIUtils.applyDialogDefaults(dialog);
 
-    JPanel panel = new JPanel();
-    panel.setLayout(new GridBagLayout());
-    panel.setBackground(Color.WHITE);
-    panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-    GridBagConstraints gbc = new GridBagConstraints();
-    gbc.insets = new Insets(5, 5, 5, 5);
-    gbc.fill = GridBagConstraints.HORIZONTAL;
+        // Create main panel with simple vertical layout
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-    ImageIcon logoIcon = new ImageIcon("src/prelim/Logo/gmail_logo_64x64.png");
-    JLabel logoLabel = new JLabel(logoIcon);
-    logoLabel.setHorizontalAlignment(JLabel.CENTER);
-    logoLabel.setVerticalAlignment(JLabel.CENTER);
-    logoLabel.setOpaque(false);
-    gbc.gridx = 0;
-    gbc.gridy = 0;
-    gbc.gridwidth = 2;
-    gbc.anchor = GridBagConstraints.CENTER;
-    gbc.fill = GridBagConstraints.NONE;
-    panel.add(logoLabel, gbc);
-    gbc.gridwidth = 1;
-    gbc.anchor = GridBagConstraints.WEST;
-    gbc.fill = GridBagConstraints.HORIZONTAL;
+        // Add logo at the top
+        ImageIcon logoIcon = new ImageIcon("src/prelim/Logo/gmail_logo_64x64.png");
+        JLabel logoLabel = new JLabel(logoIcon);
+        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(logoLabel);
 
-    JLabel nameLabel = new JLabel("Name:");
-    nameLabel.setFont(UIUtils.DEFAULT_FONT);
-    JTextField nameField = new JTextField(15);
-    JLabel emailLabel = new JLabel("Email:");
-    emailLabel.setFont(UIUtils.DEFAULT_FONT);
-    JTextField emailField = new JTextField(15);
-    JLabel passLabel = new JLabel("Password:");
-    passLabel.setFont(UIUtils.DEFAULT_FONT);
-    JPasswordField passField = new JPasswordField(15);
-    JButton registerButton = UIUtils.createPrimaryButton("Register");
-    JLabel messageLabel = new JLabel("");
-    messageLabel.setFont(UIUtils.DEFAULT_FONT);
-    messageLabel.setHorizontalAlignment(JLabel.CENTER);
+        // Add some space after logo
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-    gbc.gridx = 0;
-    gbc.gridy = 1;
-    panel.add(nameLabel, gbc);
-    gbc.gridx = 1;
-    panel.add(nameField, gbc);
+        // Name field
+        JLabel nameLabel = new JLabel("Name:");
+        nameLabel.setFont(UIUtils.DEFAULT_FONT);
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(nameLabel);
 
-    gbc.gridx = 0;
-    gbc.gridy = 2;
-    panel.add(emailLabel, gbc);
-    gbc.gridx = 1;
-    gbc.gridy = 2;
-    panel.add(emailField, gbc);
+        JTextField nameField = new JTextField(10);
+        nameField.setMaximumSize(new Dimension(300, 30));
+        nameField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(nameField);
 
-    gbc.gridx = 0;
-    gbc.gridy = 3;
-    panel.add(passLabel, gbc);
-    gbc.gridx = 1;
-    gbc.gridy = 3;
-    panel.add(passField, gbc);
+        // Add space between fields
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-    gbc.gridx = 0;
-    gbc.gridy = 4;
-    gbc.gridwidth = 2;
-    gbc.anchor = GridBagConstraints.CENTER;
-    panel.add(registerButton, gbc);
+        // Email field
+        JLabel emailLabel = new JLabel("Email:");
+        emailLabel.setFont(UIUtils.DEFAULT_FONT);
+        emailLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(emailLabel);
 
-    gbc.gridy = 5;
-    panel.add(messageLabel, gbc);
+        JTextField emailField = new JTextField(20);
+        emailField.setMaximumSize(new Dimension(300, 30));
+        emailField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(emailField);
 
+        // Add space between fields
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        // Password field
+        JLabel passLabel = new JLabel("Password:");
+        passLabel.setFont(UIUtils.DEFAULT_FONT);
+        passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(passLabel);
+
+        JPasswordField passField = new JPasswordField(20);
+        passField.setMaximumSize(new Dimension(300, 30));
+        passField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(passField);
+
+        // Add space before button
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // Register button
+        JButton registerButton = UIUtils.createPrimaryButton("Register");
+        registerButton.setMaximumSize(new Dimension(300, 30));
+        registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(registerButton);
+
+        // Add space before message
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        // Message label
+        JLabel messageLabel = new JLabel("");
+        messageLabel.setFont(UIUtils.DEFAULT_FONT);
+        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(messageLabel);
+
+        // Register button action
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent ev) {
                 String name = nameField.getText().trim();

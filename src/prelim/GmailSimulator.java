@@ -1,5 +1,6 @@
 package prelim;
 
+import javax.swing.*;
 import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.List;
@@ -231,8 +232,8 @@ public class GmailSimulator {
     }
 
     public void logout() {
-        System.out.println("Logging out... Goodbye, " + this.currentUser.getName() + "!");
-        this.currentUser = null;
+        System.out.println("Logging out...");
+        SwingUtilities.invokeLater(() -> new LogIn().createAndShowGUI(new GmailSimulator()));
     }
     
 
