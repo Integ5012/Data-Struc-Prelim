@@ -116,7 +116,8 @@ public class LogIn {
 		// Register button action
 		registerButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent ev) {
-				SwingUtilities.invokeLater(() -> Register.showRegisterGUI(frame, simulator));
+				frame.dispose();
+				SwingUtilities.invokeLater(() -> Register.showRegisterGUI(null, simulator));
 			}
 		});
 

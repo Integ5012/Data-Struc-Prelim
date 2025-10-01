@@ -90,13 +90,27 @@ public class Register {
                 String password = new String(passField.getPassword());
                 UserDatabase db = simulator.userDatabase;
                 try {
+                    if (!EmailValidator.isValidEmail(email)) {
+                        messageLabel.setText("Invalid email. Allowed domains: " + EmailValidator.getAllowedDomains());
+                        return;
+                    }
                     db.addUser(name, email, password);
                     messageLabel.setText("Registration successful! You can now log in.");
                     dialog.dispose();
-                    SwingUtilities.invokeLater(() -> new LogIn().createAndShowGUI(simulator));
                 } catch (IllegalArgumentException ex) {
                     messageLabel.setText(ex.getMessage());
                 }
+            }
+        });
+
+        // When the dialog is closed by the user (X) or after dispose, return to login UI
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                SwingUtilities.invokeLater(() -> new LogIn().createAndShowGUI(simulator));
+            }
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                // Ensure dispose triggers windowClosed
+                dialog.dispose();
             }
         });
 

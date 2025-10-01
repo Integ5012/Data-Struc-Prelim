@@ -118,6 +118,33 @@ public class User {
         this.inbox.add(var1);
     }
 
+    /**
+     * Delete an email from the inbox by its emailId.
+     * @return true if deleted; false if not found
+     */
+    public boolean deleteInboxEmailById(int var1) {
+        for (int var2 = 0; var2 < this.inbox.size(); ++var2) {
+            Email var3 = (Email)this.inbox.get(var2);
+            if (var3.getEmailId() == var1) {
+                this.inbox.remove(var2);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Delete an email from the inbox by its 0-based index (bounds checked).
+     * @return true if removed
+     */
+    public boolean deleteInboxEmailAtIndex(int var1) {
+        if (var1 < 0 || var1 >= this.inbox.size()) {
+            return false;
+        }
+        this.inbox.remove(var1);
+        return true;
+    }
+
     public String toString() {
         int var10000 = this.userId;
         return "User{userId=" + var10000 + ", name='" + this.name + "', email='" + this.email + "', inboxSize=" + this.inbox.size() + ", sentSize=" + this.sent.size() + "}";

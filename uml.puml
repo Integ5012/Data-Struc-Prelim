@@ -1,0 +1,124 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam ClassBorderColor #2E3440
+skinparam ClassBackgroundColor #ECEFF4
+skinparam ClassFontColor #2E3440
+skinparam ArrowColor #4C566A
+skinparam ArrowThickness 1.2
+
+package "prelim (Login-focused)" {
+
+  class LogIn {
+    +main(args: String[]): void
+    +createAndShowGUI(simulator: GmailSimulator): void
+  }
+
+  class GmailSimulator {
+    +userDatabase: UserDatabase
+    -currentUser: User
+    +GmailSimulator()
+  }
+
+  class Menu {
+    +showGUI(simulator: GmailSimulator, user: User): void
+  }
+
+  class Register {
+    +showRegisterGUI(parent: javax.swing.JFrame, simulator: GmailSimulator): void
+  }
+
+  class UIUtils {
+    <<utility>>
+    +PRIMARY: java.awt.Color
+    +ACCENT: java.awt.Color
+    +BACKGROUND: java.awt.Color
+    +HEADER_FONT: java.awt.Font
+    +DEFAULT_FONT: java.awt.Font
+    +createPrimaryButton(text: String): javax.swing.JButton
+    +styleButton(button: javax.swing.JButton): void
+    +applyDialogDefaults(dialog: javax.swing.JDialog): void
+    +loadIcon(path: String): javax.swing.ImageIcon
+  }
+
+  class UserDatabase {
+    +findUserByEmail(email: String): User
+    +addUser(name: String, email: String, password: String): User
+  }
+
+  class User {
+    -userId: int
+    -name: String
+    -email: String
+    -password: String
+    .. linked list fields ..
+    -inbox: LinkedList<Email>
+    -sent: LinkedList<Email>
+    +getName(): String
+    +getEmail(): String
+    +getPassword(): String
+  }
+
+  ' --- Explicit Linked List Implementation ---
+  interface MyList<T> {
+    +add(item: T): void
+    +remove(index: int): void
+    +get(index: int): T
+    +size(): int
+  }
+
+  class Node<T> {
+    -data: T
+    -next: Node<T>
+    +Node(data: T)
+    +getData(): T
+    +setData(data: T): void
+    +getNext(): Node<T>
+    +setNext(next: Node<T>): void
+  }
+
+  class LinkedList<T> {
+    -head: Node<T>
+    -size: int
+    +LinkedList()
+    +add(item: T): void
+    +remove(index: int): void
+    +get(index: int): T
+    +size(): int
+    +isEmpty(): boolean
+  }
+
+  MyList <|.. LinkedList
+  LinkedList o-- "1 head" Node
+
+  ' Relationships (usage only)
+  LogIn ..> GmailSimulator : constructs/uses
+  LogIn ..> Menu : opens GUI
+  LogIn ..> Register : opens dialog
+  LogIn ..> UIUtils : styles UI
+  LogIn ..> UserDatabase : via simulator.userDatabase
+  LogIn ..> User : for auth checks
+
+  GmailSimulator --> UserDatabase
+  Menu ..> GmailSimulator
+  Register ..> GmailSimulator
+
+  ' Indicate where LinkedList is used in the domain
+  User ..> LinkedList : uses for inbox, sent
+  note right of User
+    Linked list usage in simulator:
+    - inbox: LinkedList<Email>
+    - sent:  LinkedList<Email>
+    Each Email (not shown here) owns
+    LinkedList<Attachment> for attachments.
+  end note
+
+  note top of LinkedList
+    Singly-linked list built with Node<T>:
+    - head points to first Node
+    - Node holds data and next pointer
+    - add(...) appends by traversing to tail
+    - get(i) traverses i steps from head
+  end note
+}
+@enduml

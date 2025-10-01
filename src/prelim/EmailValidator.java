@@ -1,6 +1,10 @@
 package prelim;
 
 public class EmailValidator {
+    private static final String[] ALLOWED_DOMAINS = new String[] {
+        "gmail.com", "hotmail.com", "slu.edu.ph", "yahoo.com", "outlook.com", "icloud.com"
+    };
+
     public static boolean isValidEmail(String var0) {
         if (var0 != null && !var0.trim().isEmpty()) {
             if (!var0.contains("@")) {
@@ -27,12 +31,20 @@ public class EmailValidator {
     }
 
     private static boolean isAllowedDomain(String var0) {
-        // Allow any valid domain instead of restricting to specific ones
-        // The domain should not be empty and should contain at least one dot
-        return var0 != null && !var0.trim().isEmpty() && var0.contains(".");
+        if (var0 == null) return false;
+        String d = var0.trim().toLowerCase();
+        for (String allowed : ALLOWED_DOMAINS) {
+            if (allowed.equalsIgnoreCase(d)) return true;
+        }
+        return false;
     }
 
     public static String getAllowedDomains() {
-        return "Any valid email domain (e.g., gmail.com, hotmail.com, slu.edu.ph, etc.)";
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < ALLOWED_DOMAINS.length; i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(ALLOWED_DOMAINS[i]);
+        }
+        return sb.toString();
     }
 }
